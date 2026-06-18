@@ -1,0 +1,161 @@
+body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #1e1420, #2d132c, #801336);
+        color: white;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    .game-container {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 30px;
+        width: 100%;
+        max-width: 600px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        text-align: center;
+    }
+
+    .badge {
+        background: var(--primary);
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: bold;
+        display: inline-block;
+        margin-bottom: 10px;
+    }
+
+    .progress-bar {
+        background: rgba(255,255,255,0.1);
+        height: 8px;
+        border-radius: 4px;
+        margin-bottom: 25px;
+        overflow: hidden;
+    }
+
+    .progress {
+        background: var(--success);
+        height: 100%;
+        width: 0%;
+        transition: width 0.3s ease;
+    }
+
+    .question-box {
+        font-size: 1.2rem;
+        line-height: 1.6;
+        margin-bottom: 25px;
+        min-height: 100px;
+    }
+
+    .btn-speak {
+        background: #ffeaa7;
+        color: #2d3436;
+        border: none;
+        padding: 6px 15px;
+        border-radius: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-bottom: 15px;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .btn-show-answer {
+        background: var(--primary);
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        font-size: 1rem;
+        border-radius: 50px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(232, 67, 147, 0.4);
+    }
+
+    .btn-show-answer:hover {
+        background: var(--secondary);
+        transform: translateY(-2px);
+    }
+
+    .answer-box {
+        background: rgba(0, 184, 148, 0.15);
+        border: 2px dashed var(--success);
+        border-radius: 10px;
+        padding: 15px;
+        margin-top: 20px;
+        display: none;
+        animation: fadeIn 0.5s ease forwards;
+    }
+
+    .nav-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+    }
+
+    .btn-nav {
+        background: rgba(255,255,255,0.1);
+        color: white;
+        border: 1px solid rgba(255,255,255,0.2);
+        padding: 10px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    .btn-nav:hover:not(:disabled) {
+        background: rgba(255,255,255,0.2);
+    }
+
+    .btn-nav:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+    }
+
+    .leaderboard {
+        font-size: 2rem;
+        color: #ffeaa7;
+        margin-bottom: 20px;
+    }
+</style>
+    <div class="progress-bar">
+        <div id="progress" class="progress"></div>
+    </div>
+
+    <div>
+        <button class="btn-speak" onclick="speakCurrentQuestion()">👩‍💼 Nghe đọc lại câu hỏi (Tiếng Việt)</button>
+    </div>
+
+    <div id="question-text" class="question-box">
+        Đang tải câu hỏi...
+    </div>
+
+    <button id="btn-reveal" class="btn-show-answer" onclick="revealAnswer()">XEM ĐÁP ÁN</button>
+
+    <div id="answer-text" class="answer-box">
+        Đáp án ở đây!
+    </div>
+
+    <div class="nav-buttons">
+        <button id="btn-prev" class="btn-nav" onclick="prevQuestion()" disabled>◀ Câu trước</button>
+        <button id="btn-next" class="btn-nav" onclick="nextQuestion()">Câu tiếp ▶</button>
+    </div>
+</div>
+
+<div id="end-screen" style="display: none;">
+    <div class="leaderboard">🏆 TỔNG KẾT & VINH DANH 🏆</div>
+    <h2>Chúc Mừng Bạn Đã Hoàn Thành!</h2>
+    <p style="font-size: 1.1rem; line-height: 1.8;">
+        Thời gian thách thức bộ não bắt trend đã kết thúc.<br>
+        Hãy cộng tổng số điểm của mình (Tối đa <b>100 điểm</b>).
+    </p>
+    <button class="btn-show-answer" onclick="restartGame()" style="margin-top: 20px;">CHƠI LẠI TỪ ĐẦU</button>
+</div>
